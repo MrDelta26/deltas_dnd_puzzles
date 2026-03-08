@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Station Lock Cylinder</title>
+
+<style>
+body{
+    background:black;
+    color:#00ff9c;
+    font-family:monospace;
+    text-align:center;
+    padding-top:80px;
+}
+
+#wheels{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:40px;
+}
+
+.wheel{
+    font-size:40px;
+    border:2px solid #00ff9c;
+    width:60px;
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+button{
+    background:black;
+    color:#00ff9c;
+    border:1px solid #00ff9c;
+    padding:10px 20px;
+    font-family:monospace;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>CYLINDER SECURITY LOCK</h2>
+<p>Rotate each cylinder to align the access word.</p>
+
+<div id="wheels">
+<div class="wheel">A</div>
+<div class="wheel">A</div>
+<div class="wheel">A</div>
+<div class="wheel">A</div>
+<div class="wheel">A</div>
+<div class="wheel">A</div>
+</div>
+
+<button onclick="check()">UNLOCK</button>
+
+<p id="msg"></p>
+
+<script>
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const wheels = document.querySelectorAll(".wheel");
+
+wheels.forEach(wheel=>{
+wheel.addEventListener("click", ()=>{
+
+let current = wheel.innerText;
+let index = alphabet.indexOf(current);
+
+index = (index + 1) % 26;
+
+wheel.innerText = alphabet[index];
+
+});
+});
+
+function check(){
+
+let code = "";
+
+wheels.forEach(w=>{
+code += w.innerText;
+});
+
+if(code === "NEBULA"){
+document.getElementById("msg").innerText =
+"ACCESS GRANTED — CYLINDER RELEASED";
+}else{
+document.getElementById("msg").innerText =
+"LOCKED";
+}
+
+}
+
+</script>
+
+</body>
+</html>
